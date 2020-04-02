@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c6b9aa6f1ff58444882a6049e772ab81
+  m_SerializeEntries:
+  - m_GUID: 021b54a770d84d641825057c501fe596
+    m_Address: Assets/Sprites/letter.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0f94acab4f125bd42adddbfdbd91c5a2
+    m_Address: Assets/Sprites/letter_B.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2a10d416358828249ac23da6fb8b4426
+    m_Address: Assets/Sprites/letter_F.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2b606ffda2ef71f4e906b142d9d67405
+    m_Address: Assets/Sprites/letter_W.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3206fd3a48ff68b48bbb3f64397d070a
+    m_Address: Assets/Sprites/letter_P.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 341837bdf637c794eb36ae4a29f8bf7d
+    m_Address: Assets/Sprites/letter_O.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3ba6f88b48fed384099dde34afac2f22
+    m_Address: Assets/Sprites/letter_S.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 41375c9fec873f946814419598603931
+    m_Address: Assets/Sprites/letter_R.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4b9d27369fa6c5d43a02f7beb23eeb67
+    m_Address: Assets/Sprites/letter_E.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 558256907abb5ab41b718ee27d364fbe
+    m_Address: Assets/Sprites/letter_Z.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 625b1c6c049e36d46ab0bb3b070e7e81
+    m_Address: Assets/Sprites/letter_Y.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 73e6c7c98827e8a4ba298165db2b8fe9
+    m_Address: Assets/Sprites/letter_L.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 82b0d9640ee01a34db7f27f60cb6f636
+    m_Address: Assets/Sprites/letter_U.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 848be9bc82a58cd4e9a39f64912fdb3f
+    m_Address: Assets/Sprites/letter_N.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8831a42a4014db34a9194322b08d30d2
+    m_Address: Assets/Sprites/letter_A.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 99346b289c584f84981f9caee1da1ac6
+    m_Address: Assets/Sprites/letter_V.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9b6e519511e3b67489ec0e8f945449e5
+    m_Address: Assets/Sprites/letter_I.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9e8843e638c0f1a46b47102867b88a0c
+    m_Address: Assets/Sprites/letter_D.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cdf29e424c5e261468a2f16eb690eb52
+    m_Address: Assets/Sprites/letter_H.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d1e09969c916cc8439db493e9bebb8c0
+    m_Address: Assets/Sprites/letter_K.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d9469e7bcd2ebef459ed99885bd50e43
+    m_Address: Assets/Sprites/letter_M.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dad7186946e1c194d99e7bbf3a45d62d
+    m_Address: Assets/Sprites/letter_J.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: db1f554701910084c9df512945d8642c
+    m_Address: Assets/Sprites/letter_X.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e2e5b25e470256a4e955032e693ca4c4
+    m_Address: Assets/Sprites/letter_C.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ec91fb309404da648aeb57426384e24e
+    m_Address: Assets/Sprites/letter_Q.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ee07fcb39800856469d12e3d9a3621dc
+    m_Address: Assets/Sprites/letter_T.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f787b13ea73f7f64abdfa4c3a0c5d5f7
+    m_Address: Assets/Sprites/letter_G.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e2d8cd06db53a924e84af59cc99d1742, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d0e84e92c252f644ea455dd1980210fa, type: 2}
+    - {fileID: 11400000, guid: 3645a3af08cd5a040bdf2d2962923bcb, type: 2}
