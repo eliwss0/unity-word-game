@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class CellBehavior : MonoBehaviour
-{
+public class CellBehavior : MonoBehaviour {
     public bool selected;
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;

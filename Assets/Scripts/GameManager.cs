@@ -4,20 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     public Text SelectedString;
     public string SelectedLetters;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         SelectedString=GameObject.Find("Selected Display").GetComponent<Text>();
         SelectedString.text="";
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
     }
     void ChangeDisplayText() {
