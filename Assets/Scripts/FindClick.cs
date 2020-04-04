@@ -6,6 +6,7 @@ public class FindClick : MonoBehaviour {
     public GameObject cell;
     public GameObject gm;
     public Collider2D[] touching;
+    RaycastHit2D hit;
 
     // Start is called before the first frame update
     void Start() {
@@ -32,27 +33,24 @@ public class FindClick : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit;
 
         if(Input.GetMouseButtonDown(0)) {
             hit=Physics2D.Raycast(worldPoint,Vector2.zero);
-            if(hit.collider!=null&&hit.collider.name.Substring(0,9)=="Grid Cell") { //if raycast hit a cell
-                //Debug.Log(hit.collider.name);
-                cell=GameObject.Find(hit.collider.name);
-                Collider2D[] touching=Physics2D.OverlapCircleAll(cell.transform.position,(float)0.7);
-                touching=RemoveCollider(touching,hit.collider);
-                for(int i=0;i<touching.Length;i++)
-                    Debug.Log(touching[i].name);
-                if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
-                    cell.GetComponent<CellBehavior>().Deselect();
-                    gm.GetComponent<GameManager>().RemoveFromSelected();
-                }
-                else if(!cell.GetComponent<CellBehavior>().IsSelected()) {
-                    cell.GetComponent<CellBehavior>().Select();
-                    gm.GetComponent<GameManager>().AddToSelected(cell.GetComponent<CellBehavior>().GetChar());
-                }
+            ToggleSelected(hit);
+        }
+    }
+    public void ToggleSelected(RaycastHit2D cellHit) {
+        if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell") { //if raycast hit a cell
+            cell=GameObject.Find(cellHit.collider.name);
+            if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
+                cell.GetComponent<CellBehavior>().Deselect();
+                gm.GetComponent<GameManager>().RemoveFromSelected();
+            }
+            else if(!cell.GetComponent<CellBehavior>().IsSelected()) {
+                cell.GetComponent<CellBehavior>().Select();
+                gm.GetComponent<GameManager>().AddToSelected(cell.GetComponent<CellBehavior>().GetChar());
+                gm.GetComponent<GameManager>().AddCellToSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
             }
         }
-        touching=default(Collider2D[]);
     }
 }
