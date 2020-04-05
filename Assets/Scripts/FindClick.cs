@@ -7,10 +7,9 @@ public class FindClick : MonoBehaviour {
     public GameObject gm;
     public Collider2D[] touching;
     RaycastHit2D hit;
-
     // Start is called before the first frame update
     void Start() {
-        gm=GameObject.Find("GameManager");
+        gm=GameObject.Find("Selected Display");
     }
     public Collider2D[] RemoveCollider(Collider2D[] ColliderArray,Collider2D Remove) {
         Collider2D[] NewColliderArray = new Collider2D[ColliderArray.Length-1];
@@ -28,7 +27,6 @@ public class FindClick : MonoBehaviour {
         }
         return NewColliderArray;
     }
-    //TODO HasElement function
 
     // Update is called once per frame
     void Update() {
@@ -39,12 +37,13 @@ public class FindClick : MonoBehaviour {
             ToggleSelected(hit);
         }
     }
-    public void ToggleSelected(RaycastHit2D cellHit) {
+    public void ToggleSelected(RaycastHit2D cellHit) {  //Should probably rework to avoid GetComponent
         if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell") { //if raycast hit a cell
             cell=GameObject.Find(cellHit.collider.name);
             if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
                 cell.GetComponent<CellBehavior>().Deselect();
                 gm.GetComponent<GameManager>().RemoveFromSelected();
+                gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
             }
             else if(!cell.GetComponent<CellBehavior>().IsSelected()) {
                 cell.GetComponent<CellBehavior>().Select();

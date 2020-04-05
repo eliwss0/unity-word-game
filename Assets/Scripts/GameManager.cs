@@ -12,32 +12,38 @@ public class GameManager : MonoBehaviour {
         public Collider2D[] adjacent;
     };
     public Text SelectedString;
-    public string SelectedLetters;
+    public string SelectedLetters;  //TODO change text to take info from SelectedCells
     public List<Cell> SelectedCells;
     // Start is called before the first frame update
     void Start() {
         SelectedString=GameObject.Find("Selected Display").GetComponent<Text>();
-        SelectedString.text="";
+        List<Cell> SelectedCells = new List<Cell>();
     }
 
     // Update is called once per frame
     void Update() {
 
     }
-    void ChangeDisplayText() {
+    public void AddToSelected(char toAdd) { //TODO replace with class array equivalent
+        SelectedLetters+=toAdd;
         SelectedString.text=SelectedLetters;
     }
-    public void AddToSelected(char toAdd) { //will be replaced with struct array equivalent
-        SelectedLetters+=toAdd;
-        ChangeDisplayText();
-    }
-    public void RemoveFromSelected() {  //will be replaced with struct array equivalent
+    public void RemoveFromSelected() {  //TODO replace with class array equivalent
         SelectedLetters=SelectedLetters.Remove(SelectedLetters.Length-1);
-        ChangeDisplayText();
+        SelectedString.text=SelectedLetters;
     }
-    public void AddCellToSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {
+    public void AddCellToSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {  //TODO limit selection to adjacent
+        if(SelectedCells==null)
+            SelectedCells = new List<Cell>();
         Cell test = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
         SelectedCells.Add(test);
-        Debug.Log("Added "+cellName);
+        Debug.Log("Added "+cellName+" "+cellLetter);
+    }
+    public void RemoveCellFromSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {
+        if(SelectedCells==null)
+            SelectedCells=new List<Cell>();
+        Cell test = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
+        SelectedCells.Remove(test);
+        Debug.Log("Removed "+cellName+" "+cellLetter);
     }
 }
