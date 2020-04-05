@@ -36,18 +36,31 @@ public class FindClick : MonoBehaviour {
             hit=Physics2D.Raycast(worldPoint,Vector2.zero);
             ToggleSelected(hit);
         }
+        else if(Input.GetMouseButtonDown(1)) {
+            DeselectAllCells();
+        }
+    }
+    public void DeselectAllCells() {
+        GameObject[] SelectedCells = GameObject.FindGameObjectsWithTag("SelectedCell");
+        foreach(GameObject cell in SelectedCells) {
+            if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
+                cell.GetComponent<CellBehavior>().Deselect();
+                cell.tag="Cell";
+                gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
+            }
+        }
     }
     public void ToggleSelected(RaycastHit2D cellHit) {  //Should probably rework to avoid GetComponent
         if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell") { //if raycast hit a cell
             cell=GameObject.Find(cellHit.collider.name);
             if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
                 cell.GetComponent<CellBehavior>().Deselect();
-                gm.GetComponent<GameManager>().RemoveFromSelected();
+                cell.tag="Cell";
                 gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
             }
             else if(!cell.GetComponent<CellBehavior>().IsSelected()) {
                 cell.GetComponent<CellBehavior>().Select();
-                gm.GetComponent<GameManager>().AddToSelected(cell.GetComponent<CellBehavior>().GetChar());
+                cell.tag="SelectedCell";
                 gm.GetComponent<GameManager>().AddCellToSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
             }
         }
