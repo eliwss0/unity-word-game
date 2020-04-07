@@ -52,8 +52,6 @@ public class CellBehavior : MonoBehaviour {
     public void Select() {
         transform.localScale=new Vector3(0.95f,0.95f,0.95f);
         selected=true;
-        for(int i = 0;i<adjacent.Length;i++)
-            Debug.Log(adjacent[i].name);
     }
     public void Deselect() {
         transform.localScale=new Vector3(1,1,1);
