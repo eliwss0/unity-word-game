@@ -533,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedString: {fileID: 236553219}
   SelectedLetters: 
+  Dictionary: {fileID: 4900000, guid: 4488aeb7c5c68ef4393ea8fdb772192c, type: 3}
 --- !u!1001 &240427457
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,16 +14,20 @@ public class GameManager : MonoBehaviour {
     public Text SelectedString;
     public string SelectedLetters;  //TODO change text to take info from SelectedCells
     public List<Cell> SelectedCells;
+    public TextAsset Dictionary;
     // Start is called before the first frame update
     void Start() {
         SelectedString=GameObject.Find("Selected Display").GetComponent<Text>();
         List<Cell> SelectedCells = new List<Cell>();
         SelectedString.text="";
     }
-
     // Update is called once per frame
     void Update() {
 
+    }
+    public bool CheckWord(string word,TextAsset dict) {
+        //TODO search dict for word
+        return false;
     }
     public string CellListToString(List<Cell> cellList) {
         string cellString="";
@@ -39,11 +43,9 @@ public class GameManager : MonoBehaviour {
         }
         return newDisplayString;
     }
-    public int FindListIndex(string cellName,List<Cell> cellList) { //TODO fix only removing last occurance of char?
+    public int FindListIndex(string cellName,List<Cell> cellList) {
         for(int i = cellList.Count;i>=1;i--) {
-            Debug.Log(cellList[i-1].name);
             if(cellList[i-1].name==cellName) {
-                Debug.Log("Cell name: "+cellList[i-1].name);
                 return i-1;
             }
         }
@@ -56,25 +58,38 @@ public class GameManager : MonoBehaviour {
         }
         return false;
     }
-    public void AddCellToSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {  //TODO limit selection to adjacent
+    public bool CheckContains(List<Cell> Selected,string name) {
+        for(int i = Selected.Count;i>=1;i--) {
+            if(Selected[i-1].name==name) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool AddCellToSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {  //TODO limit selection to adjacent
         Cell toAdd = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
         if(SelectedCells==null)
             SelectedCells = new List<Cell>();
-        Cell test = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
-        if(SelectedCells.Count>1)
-            Debug.Log("Is Adjacent? "+CheckAdjacent(SelectedCells[SelectedCells.Count-1],toAdd));
-        SelectedCells.Add(test);
-        Debug.Log("Added "+cellName+" "+cellLetter);
-        Debug.Log(CellListToString(SelectedCells));
-        SelectedString.text=CellListToString(SelectedCells);
+        if((SelectedCells.Count>0&&CheckAdjacent(SelectedCells[SelectedCells.Count-1],toAdd))||SelectedCells.Count==0) {
+            SelectedCells.Add(toAdd);
+            //Debug.Log("Added "+cellName+" "+cellLetter);
+            //Debug.Log("Selected: "+CellListToString(SelectedCells));
+            SelectedString.text=CellListToString(SelectedCells);
+            return true;
+        }
+        else
+            return false;
     }
-    public void RemoveCellFromSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {
+    public bool RemoveCellFromSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {
         Cell toRemove = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
-        if(SelectedCells==null)
-            SelectedCells=new List<Cell>();
-        SelectedCells.RemoveAt(FindListIndex(cellName,SelectedCells));
-        Debug.Log("Removed "+cellName+" "+cellLetter);
-        Debug.Log(CellListToString(SelectedCells));
-        SelectedString.text=CellListToString(SelectedCells);
+        if((SelectedCells[SelectedCells.Count-1].name==toRemove.name)||CheckContains(SelectedCells,cellName)) {//TODO add condition to circumvent check for remove all
+            SelectedCells.RemoveAt(FindListIndex(cellName,SelectedCells));
+            //Debug.Log("Removed "+cellName+" "+cellLetter);
+            //Debug.Log("Selected: "+CellListToString(SelectedCells));
+            SelectedString.text=CellListToString(SelectedCells);
+            return true;
+        }
+        else
+            return false;
     }
 }

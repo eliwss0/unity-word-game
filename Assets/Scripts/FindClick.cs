@@ -43,7 +43,7 @@ public class FindClick : MonoBehaviour {
     public void DeselectAllCells() {
         GameObject[] SelectedCells = GameObject.FindGameObjectsWithTag("SelectedCell");
         foreach(GameObject cell in SelectedCells) {
-            if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
+            if(cell.GetComponent<CellBehavior>().IsSelected()) {
                 cell.GetComponent<CellBehavior>().Deselect();
                 cell.tag="Cell";
                 gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
@@ -54,15 +54,17 @@ public class FindClick : MonoBehaviour {
         if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell") { //if raycast hit a cell
             cell=GameObject.Find(cellHit.collider.name);
             if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
-                cell.GetComponent<CellBehavior>().Deselect();
-                cell.tag="Cell";
-                gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
+                if(gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent())) {
+                    cell.GetComponent<CellBehavior>().Deselect();
+                    cell.tag="Cell";
+                }
             }
             else if(!cell.GetComponent<CellBehavior>().IsSelected()) {
-                cell.GetComponent<CellBehavior>().Select();
-                cell.tag="SelectedCell";
-                gm.GetComponent<GameManager>().AddCellToSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent());
-            }
+                if(gm.GetComponent<GameManager>().AddCellToSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent())) {
+                    cell.GetComponent<CellBehavior>().Select();
+                    cell.tag="SelectedCell";
+                }
+            }   //TODO replace IsSelected with cell tag?
         }
     }
 }
