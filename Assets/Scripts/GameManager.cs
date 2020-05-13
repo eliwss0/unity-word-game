@@ -1,6 +1,8 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,19 +17,24 @@ public class GameManager : MonoBehaviour {
     public string SelectedLetters;  //TODO change text to take info from SelectedCells
     public List<Cell> SelectedCells;
     public TextAsset Dictionary;
+    public string[] words;
     // Start is called before the first frame update
     void Start() {
         SelectedString=GameObject.Find("Selected Display").GetComponent<Text>();
         List<Cell> SelectedCells = new List<Cell>();
         SelectedString.text="";
+        words=Dictionary.text.Split('\n');
     }
     // Update is called once per frame
     void Update() {
 
     }
-    public bool CheckWord(string word,TextAsset dict) {
-        //TODO search dict for word
-        return false;
+    public bool CheckWord() {   //checks if selected string is a word
+        if(Array.Exists<string>(words,element => element==SelectedString.text)) {
+            return true;
+        }
+        else
+            return false;
     }
     public string CellListToString(List<Cell> cellList) {
         string cellString="";
@@ -66,7 +73,7 @@ public class GameManager : MonoBehaviour {
         }
         return false;
     }
-    public bool AddCellToSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {  //TODO limit selection to adjacent
+    public bool AddCellToSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {
         Cell toAdd = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
         if(SelectedCells==null)
             SelectedCells = new List<Cell>();
@@ -82,7 +89,7 @@ public class GameManager : MonoBehaviour {
     }
     public bool RemoveCellFromSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {
         Cell toRemove = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
-        if((SelectedCells[SelectedCells.Count-1].name==toRemove.name)||CheckContains(SelectedCells,cellName)) {//TODO add condition to circumvent check for remove all
+        if((SelectedCells[SelectedCells.Count-1].name==toRemove.name)||CheckContains(SelectedCells,cellName)) {//TODO limit deselection to last element
             SelectedCells.RemoveAt(FindListIndex(cellName,SelectedCells));
             //Debug.Log("Removed "+cellName+" "+cellLetter);
             //Debug.Log("Selected: "+CellListToString(SelectedCells));

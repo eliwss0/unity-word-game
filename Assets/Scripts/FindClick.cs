@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class FindClick : MonoBehaviour {
@@ -54,6 +55,11 @@ public class FindClick : MonoBehaviour {
         if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell") { //if raycast hit a cell
             cell=GameObject.Find(cellHit.collider.name);
             if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
+                if(gm.GetComponent<GameManager>().CheckWord()) {  //if word matches in dict
+                    //TODO score calculating, remove tiles
+                    DeselectAllCells();
+                    return;
+                }
                 if(gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent())) {
                     cell.GetComponent<CellBehavior>().Deselect();
                     cell.tag="Cell";
