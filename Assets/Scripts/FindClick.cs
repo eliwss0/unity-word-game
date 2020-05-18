@@ -57,6 +57,7 @@ public class FindClick : MonoBehaviour {
             if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
                 if(gm.GetComponent<GameManager>().CheckWord()) {  //if word matches in dict
                     //TODO score calculating, remove tiles
+                    Debug.Log("Word is in dictionary");
                     DeselectAllCells();
                     return;
                 }

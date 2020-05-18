@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
 
     }
     public bool CheckWord() {   //checks if selected string is a word
-        if(Array.Exists<string>(words,element => element==SelectedString.text)) {
+        if(Array.Exists<string>(words,element => element==SelectedString.text)&&SelectedString.text.Length>=3) {
             return true;
         }
         else

@@ -12,7 +12,7 @@ public class CellBehavior : MonoBehaviour {
     public char currentLetter;
     public Collider2D[] adjacent;
     void Start() {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer=gameObject.GetComponent<SpriteRenderer>();
         currentLetter=' ';
         spriteRenderer.sprite=spriteArray[26];
         adjacent=GetAdjacent();
@@ -41,13 +41,14 @@ public class CellBehavior : MonoBehaviour {
         touching=RemoveCollider(touching,GetComponent<Collider2D>());
         return touching;
     }
-    public void RandLetter() {
+    public void RandLetter() {  //TODO change distribution to reflect common pairs of letters, common beginning/ending letters near edges, etc
         randGen=RandomNumberGenerator.Create();
-        byte[] rndArray = new byte[4];
-        randGen.GetBytes(rndArray);
-        int letterNum = Math.Abs(BitConverter.ToInt32(rndArray,0)%26);
+        byte[] letterArray = new byte[4];
+        randGen.GetBytes(letterArray);
+        int letterNum = Math.Abs(BitConverter.ToInt32(letterArray,0)%26);
         currentLetter=(char)(letterNum+65);
-        spriteRenderer.sprite = spriteArray[letterNum];
+        spriteRenderer.sprite=spriteArray[letterNum];
+
     }
     public void Select() {
         transform.localScale=new Vector3(0.95f,0.95f,0.95f);
