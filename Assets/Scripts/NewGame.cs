@@ -27,6 +27,17 @@ public class NewGame : MonoBehaviour {
         }
         //TODO: Start Timer when button is pressed
     }
+    public void PauseToggle() {
+        if(Time.timeScale==1) { //pause if unpaused
+            Time.timeScale=0;
+        }
+        else if(Time.timeScale==0) {  //unpause if paused
+            Time.timeScale=1;
+        }
+        else
+            Debug.Log("Pause is broken");
+        //TODO Obscure game field
+    }
     public void EndGame() {
         GameObject[] cells = GetCells();
         for(int i = 0;i<cells.Length;i++) {
