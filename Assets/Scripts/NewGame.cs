@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NewGame : MonoBehaviour {
+    public SpriteRenderer PauseObscSpriteRend;
+    public BoxCollider2D PauseObscCollider;
     public float TimeLeft = 150.0f;
     public Text DispTime;
     // Start is called before the first frame update
@@ -30,13 +32,14 @@ public class NewGame : MonoBehaviour {
     public void PauseToggle() {
         if(Time.timeScale==1) { //pause if unpaused
             Time.timeScale=0;
+            PauseObscSpriteRend.color=new Color(1,1,1,1);
         }
         else if(Time.timeScale==0) {  //unpause if paused
             Time.timeScale=1;
+            PauseObscSpriteRend.color=new Color(0,0,0,0);
         }
         else
             Debug.Log("Pause is broken");
-        //TODO Obscure game field
     }
     public void EndGame() {
         GameObject[] cells = GetCells();
