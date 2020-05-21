@@ -52,7 +52,7 @@ public class FindClick : MonoBehaviour {
         }
     }
     public void ToggleSelected(RaycastHit2D cellHit) {  //Should probably rework to avoid GetComponent
-        if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell") { //if raycast hit a cell
+        if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell"&&Time.timeScale==1) { //if raycast hit a cell
             cell=GameObject.Find(cellHit.collider.name);
             if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
                 if(gm.GetComponent<GameManager>().CheckWord()) {  //if word matches in dict

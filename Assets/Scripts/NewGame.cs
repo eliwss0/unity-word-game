@@ -11,7 +11,7 @@ public class NewGame : MonoBehaviour {
     public Text DispTime;
     // Start is called before the first frame update
     void Start() {
-        
+        PauseObscSpriteRend.color=new Color(0,0,0,0);
     }
 
     // Update is called once per frame
@@ -23,9 +23,11 @@ public class NewGame : MonoBehaviour {
         }
     }
     public void StartNewGame() {
-        GameObject[] cells=GetCells();
-        for(int i = 0;i<cells.Length;i++) {
-            cells[i].GetComponent<CellBehavior>().RandLetter();
+        if(Time.timeScale==1) {
+            GameObject[] cells = GetCells();
+            for(int i = 0;i<cells.Length;i++) {
+                cells[i].GetComponent<CellBehavior>().RandLetter();
+            }
         }
         //TODO: Start Timer when button is pressed
     }
