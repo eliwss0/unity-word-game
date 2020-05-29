@@ -93,8 +93,6 @@ public class GameManager : MonoBehaviour {
             SelectedCells = new List<Cell>();
         if((SelectedCells.Count>0&&CheckAdjacent(SelectedCells[SelectedCells.Count-1],toAdd))||SelectedCells.Count==0) {
             SelectedCells.Add(toAdd);
-            //Debug.Log("Added "+cellName+" "+cellLetter);
-            //Debug.Log("Selected: "+CellListToString(SelectedCells));
             SelectedString.text=CellListToString(SelectedCells);
             return true;
         }
@@ -103,10 +101,8 @@ public class GameManager : MonoBehaviour {
     }
     public bool RemoveCellFromSelected(string cellName,char cellLetter,Collider2D[] cellAdjacent) {
         Cell toRemove = new Cell() { name=cellName,letter=cellLetter,adjacent=cellAdjacent };
-        if((SelectedCells[SelectedCells.Count-1].name==toRemove.name)||CheckContains(SelectedCells,cellName)) {//TODO limit deselection to last element
+        if((SelectedCells[SelectedCells.Count-1].name==toRemove.name)||CheckContains(SelectedCells,cellName)) { //TODO limit deselection to last element
             SelectedCells.RemoveAt(FindListIndex(cellName,SelectedCells));
-            //Debug.Log("Removed "+cellName+" "+cellLetter);
-            //Debug.Log("Selected: "+CellListToString(SelectedCells));
             SelectedString.text=CellListToString(SelectedCells);
             return true;
         }

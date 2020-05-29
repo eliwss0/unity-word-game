@@ -7,14 +7,13 @@ using UnityEngine.UI;
 public class NewGame : MonoBehaviour {
     public SpriteRenderer PauseObscSpriteRend;
     public BoxCollider2D PauseObscCollider;
-    public float TimeLeft = 150.0f;
+    public float TimeLeft;
     public Text DispTime;
     // Start is called before the first frame update
     void Start() {
         PauseObscSpriteRend.color=new Color(0,0,0,0);
         Time.timeScale=0;
     }
-
     // Update is called once per frame
     void Update() {
         TimeLeft-=Time.deltaTime;
@@ -25,7 +24,7 @@ public class NewGame : MonoBehaviour {
     }
     public void StartNewGame() {
         Time.timeScale=1;
-        TimeLeft=150.0f;
+        TimeLeft=60.0f;
         if(Time.timeScale==1) {
             GameObject[] cells = GetCells();
             for(int i = 0;i<cells.Length;i++) {
