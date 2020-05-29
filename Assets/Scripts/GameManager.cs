@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour {
+    public static GameManager Instance;
     public class Cell {
         public string name;
         public char letter;
@@ -108,5 +109,17 @@ public class GameManager : MonoBehaviour {
         }
         else
             return false;
+    }
+    public void SaveGameManager() {
+        GameManager.Instance.Score=Score;
+    }
+    void Awake() {
+        if(Instance==null) {
+            //DontDestroyOnLoad(gameObject);
+            Instance=this;
+        }
+        else if(Instance!=this) {
+            Destroy(gameObject);
+        }
     }
 }
