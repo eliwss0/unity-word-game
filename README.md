@@ -1,4 +1,4 @@
-# Unity_Word_Game
+# Unity Word Game
 Basic word game made in Unity
 
 Art assets created by https://www.kenney.nl/
