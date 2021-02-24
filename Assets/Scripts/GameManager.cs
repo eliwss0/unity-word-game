@@ -17,13 +17,14 @@ public class GameManager : MonoBehaviour {
         {'A',1},{'B',3},{'C',3},{'D',2},{'E',1},{'F',4},{'G',2},{'H',4},{'I',1},{'J',8},{'K',5},{'L',1},{'M',3},
         {'N',1},{'O',1},{'P',3},{'Q',10},{'R',1},{'S',1},{'T',1},{'U',1},{'V',4},{'W',4},{'X',8},{'Y',4},{'Z',10}
     };
-    public string[] FoundWords;
+    public List<string> FoundWords;
     public Text SelectedString;
     public Text ScoreText;
     public int Score;
     public List<Cell> SelectedCells;
     public TextAsset Dictionary;
     public string[] words;
+    public Cell LastSelected;
     // Start is called before the first frame update
     void Start() {
         List<Cell> SelectedCells = new List<Cell>();
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour {
         words=Dictionary.text.Split('\n');
         Score=0;
         ScoreText.text="0";
-        FoundWords;
+        List<string> FoundWords = new List<string>();
     }
     // Update is called once per frame
     void Update() {
@@ -42,10 +43,11 @@ public class GameManager : MonoBehaviour {
         for(int i = 0;i<SelectedString.text.Length;i++) {
             finalScore+=LetterValues[SelectedString.text[i]];
         }
+        FoundWords.Add(SelectedString.text);
         return finalScore;
     }
     public bool CheckWord() {   //checks if selected string is a word
-        if(Array.Exists<string>(words,element => element==SelectedString.text)&&SelectedString.text.Length>=3) {    //Reads from UI text instead of game data. Change?
+        if(Array.Exists<string>(words,element => element==SelectedString.text) && SelectedString.text.Length>=3 && !FoundWords.Contains(SelectedString.text)) {    //Reads from UI text instead of game data. Change?
             Score+=ScoreWord();
             ScoreText.text=Score.ToString();
             return true;

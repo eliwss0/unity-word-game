@@ -28,7 +28,7 @@ public class NewGame : MonoBehaviour {
         if(Time.timeScale==1) {
             GameObject[] cells = GetCells();
             for(int i = 0;i<cells.Length;i++) {
-                cells[i].GetComponent<CellBehavior>().RandLetter();
+                cells[i].GetComponent<CellBehavior>().RandLetterWeighted();
             }
         }
     }

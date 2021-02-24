@@ -5,6 +5,10 @@ using System.Security.Cryptography;
 using UnityEngine;
 
 public class CellBehavior : MonoBehaviour {
+    public Dictionary<char,double> LetterFreq = new Dictionary<char,double> {
+        {'A',0.09},{'B',0.02},{'C',0.02},{'D',0.04},{'E',0.12},{'F',0.02},{'G',0.03},{'H',0.02},{'I',0.09},{'J',0.01},{'K',0.02},{'L',0.04},{'M',0.02},
+        {'N',0.06},{'O',0.08},{'P',0.02},{'Q',0.01},{'R',0.06},{'S',0.05},{'T',0.06},{'U',0.04},{'V',0.02},{'W',0.02},{'X',0.01},{'Y',0.02},{'Z',0.01}
+    };
     public bool selected;
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
@@ -41,14 +45,24 @@ public class CellBehavior : MonoBehaviour {
         touching=RemoveCollider(touching,GetComponent<Collider2D>());
         return touching;
     }
-    public void RandLetter() {  //TODO change distribution to reflect common pairs of letters, common beginning/ending letters near edges, etc
+    public void RandLetterWeighted() {  //TODO change distribution to reflect common pairs of letters, common beginning/ending letters near edges, prevent too many dupes etc
         randGen=RandomNumberGenerator.Create();
-        byte[] letterArray = new byte[4];
-        randGen.GetBytes(letterArray);
-        int letterNum = Math.Abs(BitConverter.ToInt32(letterArray,0)%26);
-        currentLetter=(char)(letterNum+65);
-        spriteRenderer.sprite=spriteArray[letterNum];
-
+        byte[] letterBytes = new byte[4];
+        randGen.GetBytes(letterBytes);
+        int letterNum = Math.Abs(BitConverter.ToInt32(letterBytes,0));
+        double frac = (double)letterNum/2147483647;
+        double cumProb = 0;
+        foreach(var i in LetterFreq) {
+            cumProb+=i.Value;
+            Debug.Log(i.Value);
+            Debug.Log(frac);
+            if(frac<=cumProb) {
+                currentLetter=i.Key;
+                Debug.Log(i.Key);
+                spriteRenderer.sprite=spriteArray[(int)i.Key-65];
+                break;
+            }
+        }
     }
     public void Select() {
         transform.localScale=new Vector3(0.95f,0.95f,0.95f);
