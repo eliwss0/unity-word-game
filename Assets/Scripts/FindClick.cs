@@ -53,18 +53,20 @@ public class FindClick : MonoBehaviour {
     }
     public void ToggleSelected(RaycastHit2D cellHit) {  //Should probably rework to avoid GetComponent
         if(cellHit.collider!=null&&cellHit.collider.name.Substring(0,9)=="Grid Cell"&&Time.timeScale==1) { //if raycast hit a cell
+            
             cell=GameObject.Find(cellHit.collider.name);
-            if(cell.GetComponent<CellBehavior>().IsSelected()) { //toggles selected state
-                if(gm.GetComponent<GameManager>().CheckWord()) {  //if word matches in dict
-                    //TODO remove word from scorable words
+
+            if (cell.GetComponent<CellBehavior>().IsSelected()) {
+                if (gm.GetComponent<GameManager>().CheckWord()) {  //if word matches in dict
                     DeselectAllCells();
                     return;
                 }
-                if(gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent())) {
+                if (gm.GetComponent<GameManager>().RemoveCellFromSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent())) {
                     cell.GetComponent<CellBehavior>().Deselect();
                     cell.tag="Cell";
                 }
             }
+
             else if(!cell.GetComponent<CellBehavior>().IsSelected()) {
                 if(gm.GetComponent<GameManager>().AddCellToSelected(cell.name,cell.GetComponent<CellBehavior>().GetChar(),cell.GetComponent<CellBehavior>().GetAdjacent())) {
                     cell.GetComponent<CellBehavior>().Select();
